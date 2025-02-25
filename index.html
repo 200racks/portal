@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal | truSolana</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .blurple {
+            color: #5865F2; /* Discord blurple */
+        }
+        .bg-blurple {
+            background-color: #5865F2; /* Discord blurple */
+        }
+        .bg-blurple-hover {
+            background-color: #4752C4; /* Darker shade for hover */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col min-h-screen">
+
+    <main class="flex-grow flex items-center justify-center">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold mb-4">Welcome back</h2>
+            <p class="text-gray-400 mb-6">Currently, truSolana is by <b>invite-only</b>.</p>
+               <div id="error-alert" class="hidden bg-red-600 text-white p-2 rounded mb-4 text-center w-64 mx-auto">
+        Invalid or empty access code. Please try again later.
+    </div>
+            <input type="text" placeholder="Enter your access code" class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-64" required/>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="bg-blurple text-white font-semibold py-2 px-4 rounded shadow hover:bg-blurple-hover transition duration-300 w-64" id="checkc">Check Code</a>
+              
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center p-4 shadow-md">
+        <p class="text-gray-400">© 2025 truMedia. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Example JavaScript to show the error alert
+        const checkCodeButton = document.querySelector('a[href="#"]');
+        const errorAlert = document.getElementById('error-alert');
+        const inputField = document.querySelector('input[type="text"]');
+
+        checkCodeButton.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default link behavior
+            const accessCode = inputField.value;
+
+            // Simulate access code validation
+            if (accessCode !== 'validcode') { // Replace 'validcode' with your actual valid code
+            errorAlert.classList.add('hidden');
+            const linkElement = document.getElementById('checkc');
+            linkElement.textContent = 'Working...';
+            const href = linkElement.getAttribute('href');
+            linkElement.setAttribute('data-href', href);
+            linkElement.removeAttribute('href');
+			linkElement.style.pointerEvents = 'none'; // Prevent clicks
+
+            setTimeout(() => {
+    errorAlert.classList.remove('hidden'); 
+    linkElement.textContent = 'Check Code';
+    linkElement.setAttribute('href', href);
+    linkElement.removeAttribute('data-href');
+    linkElement.style.pointerEvents = '';
+}, 900);
+                // Show the error alert
+            } else {
+                errorAlert.classList.add('hidden'); // Hide the error alert
+                // Proceed with valid code logic (e.g., redirect or show success message)
+                window.location.href = "https://trusolana.com"; // Example redirect
+            }
+        });
+    </script>
+
+</body>
+</html>
